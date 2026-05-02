@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - MedStyle</title>
+
+    <link rel="icon" href="asset/images/logo-vuông.png" type="images/x-icon">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/css/main.css">
+    <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div id="main">
+
+    <!-- Header giữ nguyên -->
+    <div id="header">
+        <div class="header-main">
+            <div class="header-body">
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="ti-menu"></i>
+                </button>
+
+                <div class="header-logo">
+                    <div class="logo">
+                        <img src="./asset/images/Logo-trắng.svg" alt="Logo MedStyle">
+                    </div>
+                </div>
+
+                <div class="header-menu">
+                    <ul class="nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="store.html">Store</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-cart">
+                <div class="button-cart">
+                    <input id="Search" type="search" class="nav-search" placeholder="Tìm kiếm...">
+                    <button class="btn nav-shopping ti-shopping-cart"></button>
+                    <button class="btn nav-user ti-user js-ti-user"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="auth-page">
+        <div class="auth-box">
+            <h1>ĐĂNG KÝ</h1>
+
+            <form id="registerForm">
+                <input type="text" id="registerName" placeholder="Họ và tên..." required>
+                <input type="email" id="registerEmail" placeholder="Email..." required>
+                <input type="password" id="registerPassword" placeholder="Mật khẩu..." required>
+                <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu..." required>
+
+                <button type="submit">Đăng ký</button>
+            </form>
+
+            <p>
+                Đã có tài khoản?
+                <a href="login.html">Đăng nhập</a>
+            </p>
+        </div>
+    </section>
+
+</div>
+
+<script src="./asset/js/register.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const menuBtn = document.getElementById('mobileMenuBtn')
+    const nav = document.querySelector('.header-menu')
+
+    if (menuBtn && nav) {
+        menuBtn.addEventListener('click', function () {
+            nav.classList.toggle('active')
+        })
+    }
+})
+</script>
+</body>
+</html>

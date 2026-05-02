@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedStyle</title>
+
+    <link rel="icon" href="./asset/images/logo-vuông.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="./asset/css/main.css">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" 
+        rel="stylesheet">
+</head>
+
+<body>
+<div id="main">
+
+    <!-- HEADER -->
+    <div id="header">
+        <div class="header-main">
+
+            <div class="header-body">
+              <button class="mobile-menu-btn" id="mobileMenuBtn">
+                  <i class="ti-menu"></i>
+              </button>
+                <div class="header-logo">
+                    <div class="logo">
+                        <img src="./asset/images/Logo-trắng.svg" alt="Logo MedStyle">
+                    </div>
+                </div>
+
+                <div class="header-menu">
+                    <ul class="nav">
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./store.html">Store</a></li>
+                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-cart">
+                <div class="button-cart">
+                    <form class="search-form" action="./search.html" method="get">
+                        <input 
+                            id="Search" 
+                            name="q"
+                            type="search" 
+                            class="nav-search" 
+                            placeholder="Tìm kiếm..."
+                            autocomplete="off"
+                        >
+                    </form>
+                    <a href="./cart.html" class="btn nav-shopping ti-shopping-cart"></a>
+                    <button class="btn nav-user ti-user js-ti-user"></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SLIDER -->
+    <div id="slider">
+        <div class="slide-show">
+            <div class="list-images">
+                <img src="./asset/images/BIAMEDST.jpg" alt="Slide 1">
+                <img src="./asset/images/slide-img1.png" alt="Slide 2">
+                <img src="./asset/images/bìa_MedStyle.png" alt="Slide 3">
+                <img src="./asset/images/slide-img2.png" alt="Slide 4">
+            </div>
+
+            <div class="btn-left btn-slider">
+                <i class="ti-angle-left"></i>
+            </div>
+
+            <div class="btn-right btn-slider">
+                <i class="ti-angle-right"></i>
+            </div>
+        </div>
+
+        <div class="body-slider">
+            <h1 class="text-center mt-100">BLOUSE MSCOOL</h1>
+
+            <div class="row mg-container video-wrapper">
+                <div class="col col-third text-center">
+                    <video muted playsinline class="mt-32">
+                        <source src="./asset/video/video1.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="col col-third text-center">
+                    <video muted playsinline class="mt-32">
+                        <source src="./asset/video/video2.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="col col-third text-center">
+                    <video muted playsinline class="mt-32">
+                        <source src="./asset/video/video3.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="content">
+
+        <!-- GỢI Ý -->
+        <section class="home-section">
+            <h2 class="section-title"><span>GỢI Ý CHO BẠN</span></h2>
+
+            <div class="suggest-list">
+
+                <div class="suggest-item">
+                    <a href="./product-blouse-mscool.html" class="product-link">
+                        <div class="suggest-img">
+                            <img src="./asset/images/BST/Blouse-plus.JPG" alt="">
+                        </div>
+                        <h3>BLOUSE<br>BÁC SĨ</h3>
+                    </a>
+                </div>
+
+                <div class="suggest-item">
+                    <a href="./product-blouse-ktv.html" class="product-link">
+                        <div class="suggest-img">
+                            <img src="./asset/images/Store/BL_KTV.png" alt="">
+                        </div>
+                        <h3>BLOUSE<br>KỸ THUẬT VIÊN</h3>
+                    </a>
+                </div>
+
+                <div class="suggest-item">
+                    <a href="./product-blouse-dieuduong.html" class="product-link">
+                        <div class="suggest-img">
+                            <img src="./asset/images/Store/BL_DD.png" alt="">
+                        </div>
+                        <h3>BLOUSE<br>ĐIỀU DƯỠNG</h3>
+                    </a>
+                </div>
+
+                <div class="suggest-item">
+                    <a href="./product-scrubs.html" class="product-link">
+                        <div class="suggest-img">
+                            <img src="./asset/images/BST/Scrubs-plus.JPG" alt="">
+                        </div>
+                        <h3>BỘ ĐỒ<br>SCRUBS</h3>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SẢN PHẨM -->
+        <section class="home-section">
+            <h2 class="section-title"><span>SẢN PHẨM BÁN CHẠY</span></h2>
+
+            <div class="product-list">
+                <div class="product-item">
+                  <a href="product-scrubs.html" class="product-link">
+                      <div class="product-img">
+                          <img src="./asset/images/Scrubs/Xám.JPG" alt="">
+                      </div>
+                      <p class="product-type">SCRUBS</p>
+                      <h3>SCRUBS XÁM BASIC - MSCOOL</h3>
+                      <div class="stars">★★★★★</div>
+                      <p class="price">379.000đ</p>
+                    </a>
+                </div>
+
+                <div class="product-item">
+                  <a href="product-scrubs.html" class="product-link">
+                      <div class="product-img">
+                          <img src="./asset/images/Scrubs/Xanh đen.jpg" alt="">
+                      </div>
+                      <p class="product-type">SCRUBS</p>
+                      <h3>SCRUBS XANH ĐEN BASIC - MSCOOL</h3>
+                      <div class="stars">★★★★★</div>
+                      <p class="price">379.000đ</p>
+                    </a>
+                </div>
+
+                <div class="product-item">
+                  <a href="product-scrubs.html" class="product-link">
+                      <div class="product-img">
+                          <img src="./asset/images/Scrubs/Xanh rêu.JPG" alt="">
+                      </div>
+                      <p class="product-type">SCRUBS</p>
+                      <h3>SCRUBS XANH RÊU BASIC - MSCOOL</h3>
+                      <div class="stars">★★★★★</div>
+                      <p class="price">379.000đ</p>
+                    </a>
+                </div>
+
+                <div class="product-item">
+                  <a href="product-scrubs.html" class="product-link">
+                      <div class="product-img">
+                          <img src="./asset/images/Scrubs/Xanh cổ vịt.JPG" alt="">
+                      </div>
+                      <p class="product-type">SCRUBS</p>
+                      <h3>SCRUBS XANH CỔ VỊT - MSCOOL</h3>
+                    <div class="stars">★★★★★</div>
+                    <p class="price">379.000đ</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG -->
+    <section class="home-section">
+        <h2 class="section-title"><span>BÀI VIẾT MỚI NHẤT</span></h2>
+        <a href="product-scrubs.html" class="product-link"></a>
+        <div class="blog-list">
+            <div class="blog-item">
+                <a href="https://www.facebook.com/share/p/1B5vFRMmxS/" class="blog-link">
+                    <div class="blog-img">
+                        <img src="./asset/images/post23.4.jpg" alt="">
+                        <span>23<br>TH4</span>
+                    </div>
+
+                    <h3>CẬN CẢNH BLOUSE MSCOOL NỮ TAY NGẮN - BEST SELLER TRONG MÙA HÈ</h3>
+                </a>
+            </div>
+
+            <div class="blog-item">
+                <a href="https://www.facebook.com/share/p/1DjR2HaVh3/" class="blog-link">
+                    <div class="blog-img">
+                        <img src="./asset/images/post23.42.png" alt="">
+                        <span>23<br>TH4</span>
+                    </div>
+
+                    <h3>SCRUBS MSCOOL XÁM ĐẬM - MÀU BEST SELLER TRONG MÙA HÈ</h3>
+                </a>
+            </div>
+
+            <div class="blog-item">
+                <a href="https://www.facebook.com/share/p/1EMcnzodUE/" class="blog-link">
+                    <div class="blog-img">
+                        <img src="./asset/images/post16.4.png" alt="Xu hướng thời trang y tế 2024">
+                        <span>16<br>TH4</span>
+                    </div>
+
+                    <h3>TRỰC HÈ KHÔNG NÓNG CÙNG SCRUBS MSCOOL</h3>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="about-footer">
+            <div class="about-footer-main">
+                <div class="about-footer-brand">
+                    <h2>MEDSTYLE</h2>
+                    <p>Beyond A Blouse & Scrubs</p>
+
+                    <div class="about-socials">
+                        <i class="ti-facebook"></i>
+                        <i class="ti-instagram"></i>
+                        <i class="ti-twitter"></i>
+                        <i class="ti-youtube"></i>
+                    </div>
+                </div>
+
+                <div class="about-footer-contact">
+                    <h3>LIÊN HỆ</h3>
+                    <p><strong>Điện thoại:</strong><br>033 300 7508</p>
+                    <p><strong>Email CSKH:</strong><br>medstyle.store24@gmail.com</p>
+                    <p><strong>Thời gian làm việc:</strong><br>8h00 - 20h00,<br>từ Thứ Hai - Chủ Nhật</p>
+                </div>
+
+                <div class="about-footer-store">
+                    <h3>HỆ THỐNG CỬA HÀNG</h3>
+                    <p>
+                        Hiện tại MEDSTYLE hoạt động kinh doanh qua các kênh trực tuyến và cửa hàng vật lí
+                    </p>
+
+                    <p>
+                        <strong>Địa chỉ cửa hàng:</strong><br>
+                        23 Nguyễn Bá Lân, Mỹ An, Ngũ Hành Sơn
+                    </p>
+                </div>
+            </div>
+
+            <div class="about-footer-bottom">
+                <div class="about-payment">
+                    <span>VISA</span>
+                    <span>G Pay</span>
+                    <span>VN</span>
+                </div>
+
+                <ul>
+                    <li>TRANG CHỦ</li>
+                    <li>VỀ CHÚNG TÔI</li>
+                    <li>SẢN PHẨM</li>
+                    <li>TIN TỨC</li>
+                    <li>LIÊN HỆ</li>
+                </ul>
+
+                <p>Copyright 2024 @ Tạo bởi MedStyle</p>
+            </div>
+        </footer>
+
+    <div class="footer-bottom">
+        <p>Copyright 2024 © Tạo bởi MedStyle</p>
+    </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal js-modal">
+    <div class="modal-container js-modal-container">
+
+        <div class="modal-close js-modal-close">
+            <i class="ti-close"></i>
+        </div>
+
+        <div class="modal-header">ĐĂNG NHẬP</div>
+
+        <div class="row modal-body">
+            <div class="col col-half body">
+                <form action="">
+                    <input type="text" placeholder="Tên đăng nhập hoặc email..." required class="modal-input">
+                    <input type="password" placeholder="Mật khẩu" required class="modal-input">
+
+                    <div class="text-center btn-dang-nhap">
+                        <input class="btn pull-right mt-16 text-dn" type="submit" value="Đăng nhập">
+                        <a class="modal-qmk" href="#">Quên mật khẩu?</a>
+                    </div>
+                </form>
+
+                <footer class="modal-footer">
+                    <p class="modal-text">Chưa có tài khoản?</p>
+                    <button class="btn dang-ky">Đăng ký</button>
+                </footer>
+            </div>
+
+            <div class="Scrubs">
+                <img src="./asset/images/ScrubsNu.jpg" alt="" class="scrubs-nu">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="./asset/js/index.js"></script>
+<script src="./asset/js/auth.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuBtn = document.getElementById('mobileMenuBtn')
+        const nav = document.querySelector('.header-menu')
+
+        menuBtn.addEventListener('click', function () {
+            nav.classList.toggle('active')
+        })
+    })
+  </script>
+</body>
+</html>

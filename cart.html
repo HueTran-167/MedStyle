@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOPPING CART - MedStyle</title>
+
+    <link rel="icon" href="./asset/images/logo-vuông.png" type="image/x-icon">
+    <link rel="stylesheet" href="./asset/css/main.css">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" 
+        rel="stylesheet">
+</head>
+
+<body>
+<div id="main">
+
+    <!-- HEADER -->
+    <div id="header">
+        <div class="header-main">
+            <div class="header-body">
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="ti-menu"></i>
+                </button>
+                <div class="header-logo">
+                    <div class="logo">
+                        <img src="./asset/images/Logo-trắng.svg" alt="Logo MedStyle">
+                    </div>
+                </div>
+
+                <div class="header-menu">
+                    <ul class="nav">
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./store.html">Store</a></li>
+                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-cart">
+                <div class="button-cart">
+                    <form class="search-form" action="./search.html" method="get">
+                        <input 
+                            id="Search" 
+                            name="q"
+                            type="search" 
+                            class="nav-search" 
+                            placeholder="Tìm kiếm..."
+                            autocomplete="off"
+                        >
+                    </form>
+                    <a href="./cart.html" class="btn nav-shopping ti-shopping-cart"></a>
+                    <button class="btn nav-user ti-user js-ti-user"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART -->
+    <main class="cart-page">
+        <div class="cart-container">
+
+            <div class="cart-left">
+                <h2>SẢN PHẨM</h2>
+
+                <div id="cartItems" class="cart-items"></div>
+
+                <div id="cartEmpty" class="cart-empty">
+                    Giỏ hàng chưa có sản phẩm
+                </div>
+            </div>
+
+            <aside class="cart-summary">
+                <h3>CỘNG GIỎ HÀNG</h3>
+
+                <div class="coupon-box">
+                    <div class="coupon-title" id="couponToggle">
+                        <span>Thêm một phiếu giảm giá</span>
+                        <i class="ti-angle-down"></i>
+                    </div>
+
+                    <div class="coupon-content" id="couponContent">
+                        <label class="coupon-option">
+                            <input type="radio" name="coupon" id="newUserCoupon">
+                            <span>Ưu đãi 10% cho khách hàng mới</span>
+                        </label>
+
+                        <p id="couponMessage"></p>
+                    </div>
+                </div>
+
+                <div class="summary-row">
+                    <span>Tạm tính</span>
+                    <strong id="subtotal">0,00 ₫</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Giảm giá</span>
+                    <strong id="discount">0,00 ₫</strong>
+                </div>
+
+                <div class="shipping-box">
+                    <p>Giao hàng</p>
+                    <strong>20.000,00 ₫</strong>
+                    <span>Đồng giá</span>
+                    <small id="shippingAddressText">Giao hàng đến Việt Nam</small>
+                    <button id="changeAddressBtn">ĐỔI ĐỊA CHỈ</button>
+                </div>
+
+                <div class="summary-total">
+                    <span>Tổng</span>
+                    <strong id="total">0,00 ₫</strong>
+                </div>
+
+                <button class="checkout-btn">Thanh toán</button>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- ADDRESS POPUP -->
+    <div id="addressPopup" class="address-popup">
+        <div class="address-box">
+            <button id="closeAddressPopup" class="address-close">
+                <i class="ti-close"></i>
+            </button>
+
+            <h2>ĐỔI ĐỊA CHỈ GIAO HÀNG</h2>
+
+            <form id="addressForm">
+                <input type="text" id="customerName" placeholder="Họ tên" required>
+                <input type="tel" id="customerPhone" placeholder="Số điện thoại" required>
+
+                <select id="citySelect" required>
+                    <option value="">Chọn Tỉnh/Thành phố</option>
+                </select>
+
+                <select id="wardSelect" required>
+                    <option value="">Chọn Phường/Xã</option>
+                </select>
+
+                <input 
+                    type="text" 
+                    id="streetSelect" 
+                    placeholder="Đường / Thôn / Khu phố" 
+                    required
+                >
+
+                <input 
+                    type="text" 
+                    id="detailAddress" 
+                    placeholder="Địa chỉ cụ thể: số nhà, tầng, ghi chú..." 
+                    required
+                >
+
+                <button type="submit">LƯU ĐỊA CHỈ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="about-footer">
+        <div class="about-footer-main">
+            <div class="about-footer-brand">
+                <h2>MEDSTYLE</h2>
+                <p>Beyond A Blouse & Scrubs</p>
+
+                <div class="about-socials">
+                    <i class="ti-facebook"></i>
+                    <i class="ti-instagram"></i>
+                    <i class="ti-twitter"></i>
+                    <i class="ti-youtube"></i>
+                </div>
+            </div>
+
+            <div class="about-footer-contact">
+                <h3>LIÊN HỆ</h3>
+                <p><strong>Điện thoại:</strong><br>033 300 7508</p>
+                <p><strong>Email CSKH:</strong><br>medstyle.store24@gmail.com</p>
+                <p><strong>Thời gian làm việc:</strong><br>8h00 - 20h00,<br>từ Thứ Hai - Chủ Nhật</p>
+            </div>
+
+            <div class="about-footer-store">
+                <h3>HỆ THỐNG CỬA HÀNG</h3>
+                <p>Hiện tại MEDSTYLE hoạt động kinh doanh qua các kênh trực tuyến và cửa hàng vật lí</p>
+                <p><strong>Địa chỉ cửa hàng:</strong><br>23 Nguyễn Bá Lân, Mỹ An, Ngũ Hành Sơn</p>
+            </div>
+        </div>
+
+        <div class="about-footer-bottom">
+            <div class="about-payment">
+                <span>VISA</span>
+                <span>G Pay</span>
+                <span>VN</span>
+            </div>
+
+            <ul>
+                <li>TRANG CHỦ</li>
+                <li>VỀ CHÚNG TÔI</li>
+                <li>SẢN PHẨM</li>
+                <li>TIN TỨC</li>
+                <li>LIÊN HỆ</li>
+            </ul>
+
+            <p>Copyright 2024 @ Tạo bởi MedStyle</p>
+        </div>
+    </footer>
+
+    <div class="footer-bottom">
+        <p>Đây là cửa hàng demo nhằm mục đích thử nghiệm nên các đơn hàng sẽ không có hiệu lực.</p>
+    </div>
+
+    <div class="about-fixed-icons">
+        <a href="#"><i class="ti-email"></i></a>
+        <a href="#"><i class="ti-mobile"></i></a>
+    </div>
+
+</div>
+
+<script src="./asset/js/cart.js"></script>
+<script src="./asset/js/auth.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const menuBtn = document.getElementById('mobileMenuBtn')
+
+    const nav = document.querySelector('.header-menu')
+
+    if (menuBtn && nav) {
+
+        menuBtn.addEventListener('click', function () {
+
+            nav.classList.toggle('active')
+
+        })
+
+    }
+
+})
+
+</script>
+</body>
+</html>

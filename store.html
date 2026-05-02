@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa hàng - MedStyle</title>
+
+    <link rel="icon" href="asset/images/logo-vuông.png" type="images/x-icon">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/css/main.css">
+    <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" 
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+<div id="main">
+
+    <!-- Begin: Header -->
+    <div id="header">
+        <div class="header-main">
+            <div class="header-body">
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="ti-menu"></i>
+                </button>
+
+                <div class="header-logo">
+                    <div class="logo">
+                        <img src="./asset/images/Logo-trắng.svg" alt="Logo MedStyle">
+                    </div>
+                </div>
+
+                <div class="header-menu">
+                    <ul class="nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="store.html">Store</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-cart">
+                <div class="button-cart">
+                    <form class="search-form" action="./search.html" method="get">
+                        <input 
+                            id="Search" 
+                            name="q"
+                            type="search" 
+                            class="nav-search" 
+                            placeholder="Tìm kiếm..."
+                            autocomplete="off"
+                        >
+                    </form>
+                    <button class="btn nav-shopping ti-shopping-cart"><a href=""></a></button>
+                    <button class="btn nav-user ti-user js-ti-user"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End: Header -->
+
+    <!-- Begin: Store -->
+    <main class="store-page">
+        <div class="store-container">
+
+            <div class="store-breadcrumb">
+                <a href="index.html">TRANG CHỦ</a>
+                <span>/</span>
+                <strong>CỬA HÀNG</strong>
+            </div>
+
+            <button class="mobile-filter-btn" id="mobileFilterBtn">
+                <i class="ti-filter"></i> LỌC
+            </button>
+
+            <div class="store-layout">
+
+                <!-- Sidebar -->
+                <aside class="store-sidebar">
+                    <div class="sidebar-box">
+                        <h3>DANH MỤC SẢN PHẨM</h3>
+
+                        <ul class="store-category">
+                            <li class="category-item">
+                                <div class="category-title">
+                                    Blouse Bác sĩ
+                                    <i class="ti-angle-down"></i>
+                                </div>
+                                <ul class="category-sub">
+                                    <li class="filter-category" data-filter="bac-si-mscool">Blouse MSCool</li>
+                                    <li class="filter-category" data-filter="bac-si-msford">Blouse Plus/Vest</li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item">
+                                <div class="category-title">
+                                    Blouse Kĩ thuật viên
+                                    <i class="ti-angle-down"></i>
+                                </div>
+                                <ul class="category-sub">
+                                    <li class="filter-category" data-filter="ktv-mscool">Blouse MSCool</li>
+                                    <li class="filter-category" data-filter="ktv-msford">Blouse MSFord</li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item">
+                                <div class="category-title">
+                                    Blouse Điều dưỡng
+                                    <i class="ti-angle-down"></i>
+                                </div>
+                                <ul class="category-sub">
+                                    <li class="filter-category" data-filter="dieu-duong-mscool">Blouse MSCool</li>
+                                    <li class="filter-category" data-filter="dieu-duong-msford">Blouse MSFord</li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item">
+                                <div class="category-title">
+                                    Dịch vụ
+                                    <i class="ti-angle-down"></i>
+                                </div>
+                                <ul class="category-sub">
+                                    <li class="filter-category" data-filter="theu-ten">Thêu tên</li>
+                                    <li class="filter-category" data-filter="in-logo">In logo</li>
+                                    <li class="filter-category" data-filter="theu-logo">Thêu logo</li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item">
+                                <div class="category-title">
+                                    Scrubs
+                                    <i class="ti-angle-down"></i>
+                                </div>
+                                <ul class="category-sub">
+                                    <li class="filter-category" data-filter="scrubs-mscool">Scrubs MSCool</li>
+                                    <li class="filter-category" data-filter="scrubs-msford">Scrubs Plus</li>
+                                </ul>
+                            </li>
+
+                            <li class="category-all" id="showAllProducts">Tất cả</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-box price-box">
+                        <h3>LỌC THEO GIÁ</h3>
+
+                        <input 
+                            type="range" 
+                            id="priceRange" 
+                            min="9000" 
+                            max="729000" 
+                            value="729000" 
+                            step="10000"
+                        >
+
+                        <div class="price-filter-row">
+                            <button id="filterPriceBtn">LỌC</button>
+                            <p>
+                                Giá:
+                                <strong>
+                                    9.000 ₫ — <span id="priceValue">729.000</span> ₫
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Products -->
+                <section class="store-products">
+                    <div class="store-top">
+                        <p>Hiển thị 1–12 của 15 kết quả</p>
+
+                        <select id="sortProducts">
+                            <option value="default">Thứ tự mặc định</option>
+                            <option value="newest">Mới nhất</option>
+                            <option value="price-asc">Giá thấp đến cao</option>
+                            <option value="price-desc">Giá cao đến thấp</option>
+                        </select>
+                    </div>
+
+                    <div class="product-grid">
+
+                        <div class="product-card" data-price="379000" data-category="bac-si-mscool">
+                            <img src="./asset/images/Store/Blouse_MSCool.png" alt="Áo blouse trắng bác sĩ basic MSCool">
+                            <p class="product-cat">BLOUSE BÁC SĨ</p>
+                            <h4>ÁO BLOUSE TRẮNG BÁC SĨ BASIC – MSCool</h4>
+                            <div class="stars">★★★★★</div>
+                            <p class="price">379.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="379000" data-category="bac-si-mscool">
+                            <img src="./asset/images/Store/BL_MS.png" alt="Áo blouse trắng bác sĩ basic MSCool">
+                            <p class="product-cat">BLOUSE BÁC SĨ</p>
+                            <h4>ÁO BLOUSE TRẮNG BÁC SĨ BASIC – MSCool</h4>
+                            <div class="stars">★★★★★</div>
+                            <p class="price">379.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="499000" data-category="bac-si-msford">
+                            <img src="./asset/images/Store/BL_PL.png" alt="Áo blouse plus bác sĩ">
+                            <p class="product-cat">BLOUSE BÁC SĨ</p>
+                            <h4>ÁO BLOUSE PLUS BÁC SĨ</h4>
+                            <p class="price">499.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="499000" data-category="bac-si-msford">
+                            <img src="./asset/images/Store/BL_PLU.png" alt="Áo blouse plus bác sĩ">
+                            <p class="product-cat">BLOUSE BÁC SĨ</p>
+                            <h4>ÁO BLOUSE PLUS BÁC SĨ</h4>
+                            <p class="price">499.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="729000" data-category="bac-si-msford">
+                            <img src="./asset/images/Store/BL_V.png" alt="Áo blouse trắng bác sĩ veston">
+                            <p class="product-cat">BLOUSE BÁC SĨ</p>
+                            <h4>ÁO BLOUSE TRẮNG BÁC SĨ VESTON</h4>
+                            <p class="price">729.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="729000" data-category="bac-si-msford">
+                            <img src="./asset/images/Store/BL_VE.png" alt="Áo blouse trắng bác sĩ veston">
+                            <p class="product-cat">BLOUSE BÁC SĨ</p>
+                            <h4>ÁO BLOUSE TRẮNG BÁC SĨ VESTON</h4>
+                            <p class="price">729.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="399000" data-category="ktv-mscool">
+                            <a href="./product-KTV.html">
+                                <img src="./asset/images/Store/BL_KTV.png" alt="Áo blouse trắng kĩ thuật viên">
+                                <p class="product-cat">BLOUSE KĨ THUẬT VIÊN</p>
+                                <h4>ÁO NỮ BLOUSE TRẮNG KĨ THUẬT VIÊN – MSCool</h4>
+                                <p class="price">399.000,00 ₫</p>
+                            </a>
+                        </div>
+
+                        <div class="product-card" data-price="379000" data-category="dieu-duong-mscool">
+                            <img src="./asset/images/Store/BL_DD.png" alt="Áo blouse trắng điều dưỡng">
+                            <p class="product-cat">BLOUSE ĐIỀU DƯỠNG</p>
+                            <h4>BLOUSE TRẮNG ĐIỀU DƯỠNG</h4>
+                            <p class="price">379.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="379000" data-category="scrubs-mscool">
+                            <img src="./asset/images/Store/SC_BS.png" alt="Bộ đồ scrubs basic MSCool">
+                            <p class="product-cat">SCRUBS</p>
+                            <h4>BỘ ĐỒ SCRUBS BASIC – MSCool</h4>
+                            <div class="stars">★★★★★</div>
+                            <p class="price">379.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="399000" data-category="scrubs-msford">
+                            <img src="./asset/images/Store/SC_PL.png" alt="Bộ đồ scrubs plus">
+                            <p class="product-cat">SCRUBS</p>
+                            <h4>BỘ ĐỒ SCRUBS PLUS</h4>
+                            <p class="price">399.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="399000" data-category="scrubs-msford">
+                            <img src="./asset/images/Store/SC_PLU.png" alt="Bộ đồ scrubs plus">
+                            <p class="product-cat">SCRUBS</p>
+                            <h4>BỘ ĐỒ SCRUBS PLUS</h4>
+                            <p class="price">399.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="50000" data-category="thêu-tên">
+                            <img src="./asset/images/DV/Thêu tên.png" alt="thêu-tên">
+                            <p class="product-cat">DỊCH VỤ</p>
+                            <h4>THÊU TÊN LÊN SẢN PHẨM</h4>
+                            <p class="price">50.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="50000" data-category="thêu-logo">
+                            <img src="./asset/images/DV/Thêu logo.png" alt="thêu-logo">
+                            <p class="product-cat">DỊCH VỤ</p>
+                            <h4>THÊU LOGO LÊN SẢN PHẨM</h4>
+                            <p class="price">50.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="50000" data-category="in-logo">
+                            <img src="./asset/images/DV/Inlogo.png" alt="in-logo">
+                            <p class="product-cat">DỊCH VỤ</p>
+                            <h4>IN LOGO LÊN SẢN PHẨM</h4>
+                            <p class="price">50.000,00 ₫</p>
+                        </div>
+
+                        <div class="product-card" data-price="50000" data-category="May đo">
+                            <img src="./asset/images/DV/May đo.png" alt="May đo">
+                            <p class="product-cat">DỊCH VỤ</p>
+                            <h4>MAY ĐO THEO SỐ ĐO RIÊNG</h4>
+                            <p class="price">70.000,00 ₫</p>
+                        </div>
+                    </div>
+
+                    <div class="store-pagination">
+                        <a class="active" href="#">1</a>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+    <!-- End: Store -->
+
+    <!-- Begin: Footer -->
+    <footer class="about-footer store-footer">
+        <div class="about-footer-main">
+            <div class="about-footer-brand">
+                <h2>MEDSTYLE</h2>
+                <p>Beyond A Blouse & Scrubs</p>
+
+                <div class="about-socials">
+                    <i class="ti-facebook"></i>
+                    <i class="ti-instagram"></i>
+                    <i class="ti-twitter"></i>
+                    <i class="ti-youtube"></i>
+                </div>
+            </div>
+
+            <div class="about-footer-contact">
+                <h3>LIÊN HỆ</h3>
+                <p><strong>Điện thoại:</strong><br>033 300 7508</p>
+                <p><strong>Email CSKH:</strong><br>medstylestore24@gmail.com</p>
+                <p><strong>Thời gian làm việc:</strong><br>8h00 - 20h00,<br>từ Thứ Hai - Chủ Nhật</p>
+            </div>
+
+            <div class="about-footer-store">
+                <h3>HỆ THỐNG CỬA HÀNG</h3>
+                <p>
+                    Hiện tại MEDSTYLE hoạt động kinh doanh qua các kênh trực tuyến và cửa hàng vật lí
+                </p>
+                <p>
+                    <strong>Địa chỉ cửa hàng:</strong><br>
+                    23 Nguyễn Bá Lân, Mỹ An, Ngũ Hành Sơn
+                </p>
+            </div>
+        </div>
+
+        <div class="about-footer-bottom">
+            <div class="about-payment">
+                <span>VISA</span>
+                <span>G Pay</span>
+                <span>VN</span>
+            </div>
+
+            <ul>
+                <li>TRANG CHỦ</li>
+                <li>VỀ CHÚNG TÔI</li>
+                <li>SẢN PHẨM</li>
+                <li>TIN TỨC</li>
+                <li>LIÊN HỆ</li>
+            </ul>
+
+            <p>Copyright 2024 @ Tạo bởi MedStyle</p>
+        </div>
+
+    </footer>
+    <!-- End: Footer -->
+
+    <div class="about-fixed-icons">
+        <a href="#"><i class="ti-email"></i></a>
+        <a href="#"><i class="ti-mobile"></i></a>
+    </div>
+
+</div>
+
+<script src="./asset/js/store.js"></script>
+<script src="./asset/js/auth.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuBtn = document.getElementById('mobileMenuBtn')
+        const nav = document.querySelector('.header-menu')
+        const filterBtn = document.getElementById('mobileFilterBtn')
+        const sidebar = document.querySelector('.store-sidebar')
+
+        if (menuBtn && nav) {
+            menuBtn.addEventListener('click', function () {
+                nav.classList.toggle('active')
+            })
+        }
+
+        if (filterBtn && sidebar) {
+            filterBtn.addEventListener('click', function () {
+                sidebar.classList.toggle('active')
+            })
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYING - MedStyle</title>
+
+    <link rel="icon" href="./asset/images/logo-vuông.png" type="image/x-icon">
+    <link rel="stylesheet" href="./asset/css/main.css">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" 
+        rel="stylesheet">
+</head>
+
+<body>
+<div id="main">
+
+    <!-- HEADER -->
+    <div id="header">
+        <div class="header-main">
+            <div class="header-body">
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="ti-menu"></i>
+                </button>
+                <div class="header-logo">
+                    <div class="logo">
+                        <img src="./asset/images/Logo-trắng.svg" alt="Logo MedStyle">
+                    </div>
+                </div>
+
+                <div class="header-menu">
+                    <ul class="nav">
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./store.html">Store</a></li>
+                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-cart">
+                <div class="button-cart">
+                    <form class="search-form" action="./search.html" method="get">
+                        <input id="Search" name="q" type="search" class="nav-search" placeholder="Tìm kiếm..." autocomplete="off">
+                    </form>
+                    <a href="./cart.html" class="btn nav-shopping ti-shopping-cart"></a>
+                    <button class="btn nav-user ti-user js-ti-user"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT -->
+    <main class="checkout-page">
+        <div class="checkout-container">
+
+            <section class="checkout-left">
+                <div class="checkout-block">
+                    <h2>Thông tin liên lạc</h2>
+                    <p>Chúng tôi sẽ sử dụng email này để gửi cho bạn chi tiết và cập nhật về đơn hàng của bạn.</p>
+
+                    <label>Địa chỉ email</label>
+                    <input type="email" id="checkoutEmail" readonly>
+
+                    <label class="checkout-check">
+                        <input type="checkbox">
+                        <span>I would like to receive exclusive emails with discounts and product information</span>
+                    </label>
+                </div>
+
+                <div class="checkout-block">
+                    <h2>Địa chỉ giao hàng</h2>
+                    <p>Nhập địa chỉ nơi bạn muốn đơn hàng của mình được giao.</p>
+
+                    <div id="savedAddressBox" class="saved-address-box">
+                        <div id="savedAddressText"></div>
+                        <button id="editAddressBtn">SỬA</button>
+                    </div>
+
+                    <label class="checkout-check">
+                        <input type="checkbox" checked>
+                        <span>Sử dụng cùng địa chỉ cho thanh toán</span>
+                    </label>
+                </div>
+
+                <div class="checkout-block">
+                    <h2>Tùy chọn giao hàng</h2>
+
+                    <label class="checkout-option active">
+                        <input type="radio" checked>
+                        <span>Đồng giá</span>
+                        <strong>20.000,00 ₫</strong>
+                    </label>
+                </div>
+
+                <div class="checkout-block">
+                    <h2>Tùy chọn thanh toán</h2>
+
+                    <label class="checkout-payment" data-payment="bank">
+                        <input type="radio" name="payment" value="bank">
+                        <span>Chuyển khoản ngân hàng</span>
+
+                        <p>
+                            Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi.
+                            Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán.
+                            Đơn hàng sẽ được giao sau khi tiền đã chuyển.
+                        </p>
+                    </label>
+
+                    <label class="checkout-payment active" data-payment="cod">
+                        <input type="radio" name="payment" value="cod" checked>
+                        <span>Trả tiền mặt khi nhận hàng</span>
+                    </label>
+                </div>
+
+                <button id="placeOrderBtn" class="place-order-btn">ĐẶT HÀNG</button>
+            </section>
+
+            <aside class="checkout-summary">
+                <div class="checkout-summary-title">
+                    <h3>Tóm tắt đơn hàng</h3>
+                    <i class="ti-angle-up"></i>
+                </div>
+
+                <div id="checkoutItems"></div>
+
+                <div class="checkout-coupon">
+                    <span>Thêm một phiếu giảm giá</span>
+                    <i class="ti-angle-down"></i>
+                </div>
+
+                <div class="checkout-row">
+                    <span>Tạm tính</span>
+                    <strong id="checkoutSubtotal">0,00 ₫</strong>
+                </div>
+
+                <div class="checkout-row">
+                    <span>Giao hàng<br><small>Đồng giá</small></span>
+                    <strong>20.000,00 ₫</strong>
+                </div>
+
+                <p id="checkoutShippingText" class="checkout-shipping-text">
+                    Giao hàng đến Việt Nam
+                </p>
+
+                <div class="checkout-total">
+                    <span>Tổng</span>
+                    <strong id="checkoutTotal">0,00 ₫</strong>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- ADDRESS POPUP -->
+    <div id="addressPopup" class="address-popup">
+        <div class="address-box">
+            <button id="closeAddressPopup" class="address-close">
+                <i class="ti-close"></i>
+            </button>
+
+            <h2>ĐỔI ĐỊA CHỈ GIAO HÀNG</h2>
+
+            <form id="addressForm">
+                <input type="text" id="customerName" placeholder="Họ tên" required>
+                <input type="tel" id="customerPhone" placeholder="Số điện thoại" required>
+
+                <select id="citySelect" required>
+                    <option value="">Chọn Tỉnh/Thành phố</option>
+                </select>
+
+                <select id="wardSelect" required>
+                    <option value="">Chọn Phường/Xã</option>
+                </select>
+
+                <input type="text" id="streetSelect" placeholder="Đường / Thôn / Khu phố" required>
+                <input type="text" id="detailAddress" placeholder="Địa chỉ cụ thể: số nhà, tầng, ghi chú..." required>
+
+                <button type="submit">LƯU ĐỊA CHỈ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS POPUP -->
+    <div id="orderPopup" class="popup-overlay">
+        <div class="popup-box">
+            <p>Đặt hàng thành công!<br>Cảm ơn bạn đã mua hàng tại MedStyle.</p>
+            <button id="orderOkBtn">OK</button>
+        </div>
+    </div>
+
+    <div id="paymentPopup" class="popup-overlay">
+        <div class="popup-box payment-popup-box">
+            <h3>Mã QR thanh toán</h3>
+
+            <div class="qr-box">
+                <img src="./asset/images/maQR.jpg" alt="Mã QR thanh toán">
+                <p>Quét QR để thanh toán</p>
+            </div>
+
+            <label class="payment-upload-label">
+                Up file để minh chứng
+                <input type="file" id="paymentProof" accept="image/*,.pdf">
+            </label>
+
+            <button id="paymentDoneBtn">Xác nhận đã thanh toán</button>
+            <button id="paymentCancelBtn" class="payment-cancel-btn">Huỷ</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="./asset/js/checkout.js"></script>
+<script src="./asset/js/auth.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const menuBtn = document.getElementById('mobileMenuBtn')
+
+    const nav = document.querySelector('.header-menu')
+
+    if (menuBtn && nav) {
+
+        menuBtn.addEventListener('click', function () {
+
+            nav.classList.toggle('active')
+
+        })
+
+    }
+
+})
+
+</script>
+</body>
+</html>
