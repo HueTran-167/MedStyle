@@ -109,21 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
         startSlider();
     }
 
-    /* VIDEO HOVER PLAY */
-    const videos = document.querySelectorAll(".video-wrapper video");
-
-    videos.forEach(video => {
-        video.addEventListener("mouseenter", () => {
-            video.play();
-        });
-
-        video.addEventListener("mouseleave", () => {
-            video.pause();
-            video.currentTime = 0;
-            video.load();
-        });
-    });
-
     /* PROMO POPUP */
     const promoPopup = document.getElementById("promoPopup");
     const closePromoPopup = document.getElementById("closePromoPopup");

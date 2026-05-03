@@ -4742,3 +4742,21 @@ video {
         width: 86%;
     }
 }
+
+.home-video {
+    width: 75%;
+    max-width: 360px;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    display: block;
+    margin: 32px auto 0;
+    border-radius: 14px;
+    background: #f2f2f2;
+}
+
+@media (max-width: 768px) {
+    .home-video {
+        width: 88%;
+        max-width: 320px;
+    }
+}
