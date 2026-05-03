@@ -51,7 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
             item.gender || '',
             item.color || '',
             item.sleeve || '',
-            item.size || ''
+            item.size || '',
+            item.serviceType || '',
+            item.note || ''
         ].join('|').toLowerCase()
     }
 
@@ -170,6 +172,17 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     }
 
+    function renderProductOptions(item) {
+        return `
+            ${item.gender ? 'Phân loại: ' + item.gender + '<br>' : ''}
+            ${item.color ? 'Màu: ' + item.color + '<br>' : ''}
+            ${item.sleeve ? 'Tay áo: ' + item.sleeve + '<br>' : ''}
+            ${item.size ? 'Size: ' + item.size + '<br>' : ''}
+            ${item.serviceType ? 'Phân loại: ' + item.serviceType + '<br>' : ''}
+            ${item.note ? 'Nội dung thêu: ' + item.note : ''}
+        `
+    }
+
     function renderCart() {
         const cart = mergeSameProducts()
         cartItems.innerHTML = ''
@@ -192,10 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <h4>${item.name}</h4>
                             <p>${formatPrice(item.price)}</p>
                             <small>
-                                ${item.gender ? 'Phân loại: ' + item.gender + '<br>' : ''}
-                                ${item.color ? 'Màu: ' + item.color + '<br>' : ''}
-                                ${item.sleeve ? 'Tay áo: ' + item.sleeve + '<br>' : ''}
-                                ${item.size ? 'Size: ' + item.size : ''}
+                                ${renderProductOptions(item)}
                             </small>
 
                             <div class="cart-qty">
@@ -312,6 +322,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadProvinces() {
         try {
+            if (!citySelect) return
+
             citySelect.innerHTML = '<option value="">Chọn Tỉnh/Thành phố</option>'
 
             const response = await fetch('https://provinces.open-api.vn/api/p/')
@@ -330,6 +342,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadWards(provinceCode) {
         try {
+            if (!wardSelect) return
+
             wardSelect.innerHTML = '<option value="">Đang tải Phường/Xã...</option>'
 
             const response = await fetch(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=3`)
@@ -346,14 +360,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             })
         } catch (error) {
-            wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
+            if (wardSelect) {
+                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
+            }
+
             console.log('Không tải được danh sách phường/xã:', error)
         }
     }
 
     if (citySelect) {
         citySelect.addEventListener('change', function () {
-            wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
+            if (wardSelect) {
+                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
+            }
 
             if (citySelect.value) {
                 loadWards(citySelect.value)
@@ -381,13 +400,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             localStorage.setItem('shippingAddress', JSON.stringify(addressInfo))
 
-            shippingAddressText.textContent = `Giao hàng đến ${detailText}, ${streetText}, ${wardText}, ${cityText}`
+            if (shippingAddressText) {
+                shippingAddressText.textContent = `Giao hàng đến ${detailText}, ${streetText}, ${wardText}, ${cityText}`
+            }
 
             alert('Đã lưu địa chỉ giao hàng!')
             addressPopup.classList.remove('active')
             addressForm.reset()
 
-            wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
+            if (wardSelect) {
+                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
+            }
         })
     }
 

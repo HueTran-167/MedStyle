@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>May đo - MedStyle</title>
+
+    <link rel="icon" href="./asset/images/logo-vuông.png" type="image/x-icon">
+    <link rel="stylesheet" href="./asset/css/main.css">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/font/themify-icons/themify-icons.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div id="main">
+
+<!-- HEADER -->
+    <div id="header">
+        <div class="header-main">
+            <div class="header-body">
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="ti-menu"></i>
+                </button>
+
+                <div class="header-logo">
+                    <div class="logo">
+                        <img src="./asset/images/Logo-trắng.svg" alt="">
+                    </div>
+                </div>
+
+                <div class="header-menu">
+                    <ul class="nav">
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./store.html">Store</a></li>
+                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./about.html">About Us</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="header-cart">
+                <div class="button-cart">
+                    <form class="search-form" action="./search.html" method="get">
+                        <input name="q" type="search" class="nav-search" placeholder="Tìm kiếm...">
+                    </form>
+                    <a href="./cart.html" class="btn nav-shopping ti-shopping-cart"></a>
+                    <button class="btn nav-user ti-user js-ti-user"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- PRODUCT -->
+<main class="product-detail-page">
+<section class="product-detail-container">
+
+    <div class="product-gallery">
+
+        <div class="main-product-img" id="zoomArea">
+            <img id="mainProductImage" src="./asset/images/DV/May đo.png">
+        </div>
+    </div>
+
+    <div class="product-info-detail">
+        <p class="product-breadcrumb">TRANG CHỦ / DỊCH VỤ / MAY ĐO</p>
+
+        <h1>MAY ĐO THEO SỐ ĐO</h1>
+        <div class="product-title-line"></div>
+
+        <p class="detail-price">70.000,00 ₫</p>
+
+        <div class="detail-option">
+            <label>Số đo cụ thể</label>
+
+            <textarea id="measureNote"
+                placeholder="Ví dụ: Cao 1m65, nặng 50kg, vòng ngực 84, eo 64, mông 90..."
+                style="width:100%; min-height:120px; padding:12px;"></textarea>
+
+            <p style="font-size:13px; color:#284064; margin-top:8px;">
+                Lưu ý: Ghi rõ chiều cao, cân nặng và số đo các vòng để may chính xác.
+            </p>
+        </div>
+
+        <div class="cart-action">
+            <div class="quantity-box">
+                <button id="minusQty">-</button>
+                <input type="text" id="quantityInput" value="1" readonly>
+                <button id="plusQty">+</button>
+            </div>
+
+            <button id="addToCartBtn" class="add-cart-btn">
+                THÊM VÀO GIỎ HÀNG
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- RELATED -->
+<section class="related-products">
+    <h2>SẢN PHẨM TƯƠNG TỰ</h2>
+
+    <div class="related-list">
+        <a href="./product-theu-logo.html" class="related-item">
+            <img src="./asset/images/DV/Thêu logo.png">
+            <h3>THÊU LOGO</h3>
+        </a>
+
+        <a href="./product-theu-ten.html" class="related-item">
+            <img src="./asset/images/DV/Thêu tên.png">
+            <h3>THÊU TÊN</h3>
+        </a>
+
+        <a href="./product-in-logo.html" class="related-item">
+            <img src="./asset/images/DV/Inlogo.png">
+            <h3>IN LOGO</h3>
+        </a>
+    </div>
+</section>
+
+</main>
+
+<footer class="about-footer">
+    <!-- giữ nguyên -->
+</footer>
+
+</div>
+
+<script src="./asset/js/product-may-do.js"></script>
+<script src="./asset/js/auth.js"></script>
+
+<script>
+document.getElementById('mobileMenuBtn').onclick = function () {
+    document.querySelector('.header-menu').classList.toggle('active')
+}
+</script>
+
+</body>
+</html>
