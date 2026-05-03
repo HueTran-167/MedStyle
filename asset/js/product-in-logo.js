@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
+    function getUserKey(prefix) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+
+        if (!currentUser || !currentUser.email) {
+            alert('Bạn cần đăng nhập!')
+            window.location.href = './login.html'
+            return null
+        }
+
+        return prefix + '_' + currentUser.email
+    }
+
     const mainImg = document.getElementById('mainProductImage')
     const zoomArea = document.getElementById('zoomArea')
     const thumbs = document.querySelectorAll('.thumb')
@@ -21,7 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
             cartIcon.appendChild(badge)
         }
 
-        const cart = JSON.parse(localStorage.getItem('cart')) || []
+        const key = getUserKey('cart')
+        const cart = key ? JSON.parse(localStorage.getItem(key)) || [] : []
+
         const totalQuantity = cart.reduce(function (total, item) {
             return total + Number(item.quantity || 1)
         }, 0)
@@ -72,6 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     addToCartBtn.addEventListener('click', function () {
+        const key = getUserKey('cart')
+        if (!key) return
+
         if (logoNote.value.trim() === '') {
             addToCartBtn.textContent = 'VUI LÒNG NHẬP TÊN TRƯỜNG'
             addToCartBtn.classList.add('cart-warning')
@@ -93,9 +110,9 @@ document.addEventListener('DOMContentLoaded', function () {
             quantity: Number(quantityInput.value)
         }
 
-        const cart = JSON.parse(localStorage.getItem('cart')) || []
+        const cart = JSON.parse(localStorage.getItem(key)) || []
         cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(cart))
+        localStorage.setItem(key, JSON.stringify(cart))
 
         updateCartCount()
         flyToCart()

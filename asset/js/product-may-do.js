@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
+    function getUserKey(prefix) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+
+        if (!currentUser || !currentUser.email) {
+            alert('Bạn cần đăng nhập!')
+            window.location.href = './login.html'
+            return null
+        }
+
+        return prefix + '_' + currentUser.email
+    }
 
     const minusBtn = document.getElementById('minusQty')
     const plusBtn = document.getElementById('plusQty')
@@ -7,11 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const measureNote = document.getElementById('measureNote')
 
     plusBtn.onclick = () => quantityInput.value++
+
     minusBtn.onclick = () => {
-        if (quantityInput.value > 1) quantityInput.value--
+        if (Number(quantityInput.value) > 1) {
+            quantityInput.value--
+        }
     }
 
     addToCartBtn.onclick = function () {
+        const key = getUserKey('cart')
+        if (!key) return
 
         if (measureNote.value.trim() === '') {
             addToCartBtn.textContent = 'NHẬP SỐ ĐO'
@@ -22,17 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const product = {
             name: 'May đo theo số đo',
             price: 0,
-            image: './asset/images/DV/MayDo.png',
+            image: './asset/images/DV/may-do.png',
             serviceType: 'May đo',
-            note: measureNote.value,
+            note: measureNote.value.trim(),
             quantity: Number(quantityInput.value)
         }
 
-        let cart = JSON.parse(localStorage.getItem('cart')) || []
+        const cart = JSON.parse(localStorage.getItem(key)) || []
         cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(cart))
+        localStorage.setItem(key, JSON.stringify(cart))
 
         window.location.href = './cart.html'
     }
-
 })

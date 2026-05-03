@@ -1,7 +1,38 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    function getUserKey(prefix) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+        if (!currentUser || !currentUser.email) return null
+        return prefix + '_' + currentUser.email
+    }
+
+    function formatPrice(price) {
+        return Number(price).toLocaleString('vi-VN') + ',00 ₫'
+    }
+
+    function getCart() {
+        const key = getUserKey('cart')
+        if (!key) return []
+        return JSON.parse(localStorage.getItem(key)) || []
+    }
+
+    function saveCart(cart) {
+        const key = getUserKey('cart')
+        if (!key) return
+        localStorage.setItem(key, JSON.stringify(cart))
+    }
+
+    function getAddressKey() {
+        return getUserKey('address')
+    }
+
+    function getCouponKey() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+        return currentUser ? 'newUserCouponUsed_' + currentUser.email : null
+    }
+
     const cartItems = document.getElementById('cartItems')
     const cartEmpty = document.getElementById('cartEmpty')
-
     const subtotalEl = document.getElementById('subtotal')
     const discountEl = document.getElementById('discount')
     const totalEl = document.getElementById('total')
@@ -21,69 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const shippingAddressText = document.getElementById('shippingAddressText')
 
     const shippingFee = 20000
-    let isCouponApplied = localStorage.getItem('cartCouponApplied') === 'true'
 
-    function formatPrice(price) {
-        return Number(price).toLocaleString('vi-VN') + ',00 ₫'
-    }
-
-    function getCart() {
-        return JSON.parse(localStorage.getItem('cart')) || []
-    }
-
-    function saveCart(cart) {
-        localStorage.setItem('cart', JSON.stringify(cart))
-    }
-
-    function getCurrentUserEmail() {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
-        return currentUser ? currentUser.email : 'guest'
-    }
-
-    function getCouponKey() {
-        return 'newUserCouponUsed_' + getCurrentUserEmail()
-    }
-
-    function getProductKey(item) {
-        return [
-            item.name || '',
-            item.price || '',
-            item.gender || '',
-            item.color || '',
-            item.sleeve || '',
-            item.size || '',
-            item.serviceType || '',
-            item.note || ''
-        ].join('|').toLowerCase()
-    }
-
-    function mergeSameProducts() {
-        const cart = getCart()
-        const merged = []
-
-        cart.forEach(function (item) {
-            const existedItem = merged.find(function (product) {
-                return getProductKey(product) === getProductKey(item)
-            })
-
-            if (existedItem) {
-                existedItem.quantity = Number(existedItem.quantity || 1) + Number(item.quantity || 1)
-            } else {
-                merged.push({
-                    ...item,
-                    quantity: Number(item.quantity || 1)
-                })
-            }
-        })
-
-        saveCart(merged)
-        return merged
-    }
+    let isCouponApplied = false
 
     function getSubtotal() {
-        const cart = getCart()
-
-        return cart.reduce(function (total, item) {
+        return getCart().reduce((total, item) => {
             return total + Number(item.price) * Number(item.quantity)
         }, 0)
     }
@@ -120,9 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const cart = getCart()
-        const totalQuantity = cart.reduce(function (total, item) {
-            return total + Number(item.quantity || 1)
-        }, 0)
+        const totalQuantity = cart.reduce((total, item) => total + Number(item.quantity || 1), 0)
 
         if (totalQuantity > 0) {
             badge.textContent = totalQuantity
@@ -132,59 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function bindCartButtons() {
-        document.querySelectorAll('.plus-cart').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                const index = Number(btn.dataset.index)
-                const cart = getCart()
-
-                cart[index].quantity = Number(cart[index].quantity) + 1
-                saveCart(cart)
-                renderCart()
-            })
-        })
-
-        document.querySelectorAll('.minus-cart').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                const index = Number(btn.dataset.index)
-                const cart = getCart()
-
-                if (Number(cart[index].quantity) > 1) {
-                    cart[index].quantity = Number(cart[index].quantity) - 1
-                } else {
-                    cart.splice(index, 1)
-                }
-
-                saveCart(cart)
-                renderCart()
-            })
-        })
-
-        document.querySelectorAll('.remove-cart').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                const index = Number(btn.dataset.index)
-                const cart = getCart()
-
-                cart.splice(index, 1)
-                saveCart(cart)
-                renderCart()
-            })
-        })
-    }
-
-    function renderProductOptions(item) {
-        return `
-            ${item.gender ? 'Phân loại: ' + item.gender + '<br>' : ''}
-            ${item.color ? 'Màu: ' + item.color + '<br>' : ''}
-            ${item.sleeve ? 'Tay áo: ' + item.sleeve + '<br>' : ''}
-            ${item.size ? 'Size: ' + item.size + '<br>' : ''}
-            ${item.serviceType ? 'Phân loại: ' + item.serviceType + '<br>' : ''}
-            ${item.note ? 'Nội dung thêu: ' + item.note : ''}
-        `
-    }
-
     function renderCart() {
-        const cart = mergeSameProducts()
+        const cart = getCart()
         cartItems.innerHTML = ''
 
         if (cart.length === 0) {
@@ -194,236 +114,143 @@ document.addEventListener('DOMContentLoaded', function () {
             cartEmpty.style.display = 'none'
             cartItems.style.display = 'block'
 
-            cart.forEach(function (item, index) {
-                const cartItem = document.createElement('div')
-                cartItem.className = 'cart-item'
+            cart.forEach((item, index) => {
+                const div = document.createElement('div')
+                div.className = 'cart-item'
 
-                cartItem.innerHTML = `
+                div.innerHTML = `
                     <div class="cart-product">
-                        <img src="${item.image}" alt="${item.name}">
+                        <img src="${item.image}">
                         <div>
                             <h4>${item.name}</h4>
                             <p>${formatPrice(item.price)}</p>
-                            <small>
-                                ${renderProductOptions(item)}
-                            </small>
 
                             <div class="cart-qty">
                                 <button class="minus-cart" data-index="${index}">-</button>
-                                <input type="text" value="${item.quantity}" readonly>
+                                <input value="${item.quantity}" readonly>
                                 <button class="plus-cart" data-index="${index}">+</button>
                             </div>
 
-                            <button class="remove-cart" data-index="${index}">Xóa sản phẩm</button>
+                            <button class="remove-cart" data-index="${index}">Xóa</button>
                         </div>
                     </div>
 
                     <strong>${formatPrice(item.price * item.quantity)}</strong>
                 `
 
-                cartItems.appendChild(cartItem)
+                cartItems.appendChild(div)
             })
         }
 
         updateSummary()
         updateCartBadge()
-        bindCartButtons()
+        bindButtons()
+    }
+
+    function bindButtons() {
+        document.querySelectorAll('.plus-cart').forEach(btn => {
+            btn.onclick = () => {
+                const cart = getCart()
+                cart[btn.dataset.index].quantity++
+                saveCart(cart)
+                renderCart()
+            }
+        })
+
+        document.querySelectorAll('.minus-cart').forEach(btn => {
+            btn.onclick = () => {
+                const cart = getCart()
+                const i = btn.dataset.index
+
+                if (cart[i].quantity > 1) {
+                    cart[i].quantity--
+                } else {
+                    cart.splice(i, 1)
+                }
+
+                saveCart(cart)
+                renderCart()
+            }
+        })
+
+        document.querySelectorAll('.remove-cart').forEach(btn => {
+            btn.onclick = () => {
+                const cart = getCart()
+                cart.splice(btn.dataset.index, 1)
+                saveCart(cart)
+                renderCart()
+            }
+        })
     }
 
     function renderCoupon() {
-        const couponUsed = localStorage.getItem(getCouponKey())
+        const used = localStorage.getItem(getCouponKey())
 
-        if (!couponContent) return
-
-        if (couponUsed === 'true') {
-            isCouponApplied = false
-            localStorage.setItem('cartCouponApplied', 'false')
-
-            couponContent.innerHTML = `
-                <p class="coupon-error">Bạn hiện không có phiếu giảm giá nào.</p>
-            `
-
-            updateSummary()
+        if (used === 'true') {
+            couponContent.innerHTML = `<p>Không có voucher</p>`
             return
         }
 
         couponContent.innerHTML = `
-            <label class="coupon-option">
-                <input type="checkbox" id="newUserCoupon">
-                <span>Ưu đãi 10% cho khách hàng mới</span>
+            <label>
+                <input type="checkbox" id="couponCheck">
+                Ưu đãi 10%
             </label>
-            <p id="couponMessage"></p>
         `
 
-        const newUserCoupon = document.getElementById('newUserCoupon')
-        const couponMessage = document.getElementById('couponMessage')
-
-        if (isCouponApplied) {
-            newUserCoupon.checked = true
-            couponMessage.textContent = 'Đã áp dụng ưu đãi 10% cho khách hàng mới.'
-            couponMessage.className = 'coupon-success'
-        }
-
-        newUserCoupon.addEventListener('change', function () {
-            isCouponApplied = newUserCoupon.checked
-            localStorage.setItem('cartCouponApplied', isCouponApplied ? 'true' : 'false')
-
-            if (isCouponApplied) {
-                couponMessage.textContent = 'Đã áp dụng ưu đãi 10% cho khách hàng mới.'
-                couponMessage.className = 'coupon-success'
-            } else {
-                couponMessage.textContent = 'Đã bỏ áp dụng voucher. Bạn vẫn có thể dùng lại trước khi thanh toán.'
-                couponMessage.className = 'coupon-success'
-            }
-
+        document.getElementById('couponCheck').onchange = function () {
+            isCouponApplied = this.checked
             updateSummary()
-        })
-    }
-
-    if (couponToggle) {
-        couponToggle.addEventListener('click', function () {
-            couponContent.classList.toggle('open')
-        })
-    }
-
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function () {
-            const cart = getCart()
-
-            if (cart.length === 0) {
-                alert('Giỏ hàng chưa có sản phẩm!')
-                return
-            }
-
-            localStorage.setItem('cartCouponApplied', isCouponApplied ? 'true' : 'false')
-            window.location.href = './checkout.html'
-        })
-    }
-
-    if (changeAddressBtn) {
-        changeAddressBtn.addEventListener('click', function () {
-            addressPopup.classList.add('active')
-        })
-    }
-
-    if (closeAddressPopup) {
-        closeAddressPopup.addEventListener('click', function () {
-            addressPopup.classList.remove('active')
-        })
-    }
-
-    if (addressPopup) {
-        addressPopup.addEventListener('click', function (event) {
-            if (event.target === addressPopup) {
-                addressPopup.classList.remove('active')
-            }
-        })
-    }
-
-    async function loadProvinces() {
-        try {
-            if (!citySelect) return
-
-            citySelect.innerHTML = '<option value="">Chọn Tỉnh/Thành phố</option>'
-
-            const response = await fetch('https://provinces.open-api.vn/api/p/')
-            const provinces = await response.json()
-
-            provinces.forEach(function (province) {
-                const option = document.createElement('option')
-                option.value = province.code
-                option.textContent = province.name
-                citySelect.appendChild(option)
-            })
-        } catch (error) {
-            console.log('Không tải được danh sách tỉnh/thành phố:', error)
         }
     }
 
-    async function loadWards(provinceCode) {
-        try {
-            if (!wardSelect) return
-
-            wardSelect.innerHTML = '<option value="">Đang tải Phường/Xã...</option>'
-
-            const response = await fetch(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=3`)
-            const province = await response.json()
-
-            wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
-
-            province.districts.forEach(function (district) {
-                district.wards.forEach(function (ward) {
-                    const option = document.createElement('option')
-                    option.value = ward.name + ' - ' + district.name
-                    option.textContent = ward.name + ' - ' + district.name
-                    wardSelect.appendChild(option)
-                })
-            })
-        } catch (error) {
-            if (wardSelect) {
-                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
-            }
-
-            console.log('Không tải được danh sách phường/xã:', error)
-        }
+    function saveAddress(address) {
+        const key = getAddressKey()
+        if (!key) return
+        localStorage.setItem(key, JSON.stringify(address))
     }
 
-    if (citySelect) {
-        citySelect.addEventListener('change', function () {
-            if (wardSelect) {
-                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
-            }
+    function loadAddress() {
+        const key = getAddressKey()
+        if (!key) return
 
-            if (citySelect.value) {
-                loadWards(citySelect.value)
-            }
-        })
+        const data = JSON.parse(localStorage.getItem(key))
+        if (!data || !shippingAddressText) return
+
+        shippingAddressText.textContent =
+            `Giao hàng đến ${data.detail}, ${data.street}, ${data.ward}, ${data.city}`
     }
 
     if (addressForm) {
-        addressForm.addEventListener('submit', function (event) {
-            event.preventDefault()
+        addressForm.onsubmit = function (e) {
+            e.preventDefault()
 
-            const cityText = citySelect.options[citySelect.selectedIndex].text
-            const wardText = wardSelect.value
-            const streetText = streetSelect.value.trim()
-            const detailText = document.getElementById('detailAddress').value.trim()
-
-            const addressInfo = {
-                name: document.getElementById('customerName').value.trim(),
-                phone: document.getElementById('customerPhone').value.trim(),
-                city: cityText,
-                ward: wardText,
-                street: streetText,
-                detail: detailText
+            const address = {
+                name: document.getElementById('customerName').value,
+                phone: document.getElementById('customerPhone').value,
+                city: citySelect.options[citySelect.selectedIndex].text,
+                ward: wardSelect.value,
+                street: streetSelect.value,
+                detail: document.getElementById('detailAddress').value
             }
 
-            localStorage.setItem('shippingAddress', JSON.stringify(addressInfo))
-
-            if (shippingAddressText) {
-                shippingAddressText.textContent = `Giao hàng đến ${detailText}, ${streetText}, ${wardText}, ${cityText}`
-            }
-
-            alert('Đã lưu địa chỉ giao hàng!')
+            saveAddress(address)
+            loadAddress()
             addressPopup.classList.remove('active')
-            addressForm.reset()
-
-            if (wardSelect) {
-                wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'
-            }
-        })
-    }
-
-    function loadSavedAddress() {
-        const savedAddress = JSON.parse(localStorage.getItem('shippingAddress'))
-
-        if (savedAddress && shippingAddressText) {
-            shippingAddressText.textContent = `Giao hàng đến ${savedAddress.detail}, ${savedAddress.street}, ${savedAddress.ward}, ${savedAddress.city}`
         }
     }
 
-    renderCoupon()
+    if (checkoutBtn) {
+        checkoutBtn.onclick = function () {
+            if (getCart().length === 0) {
+                alert('Giỏ hàng trống!')
+                return
+            }
+            window.location.href = './checkout.html'
+        }
+    }
+
     renderCart()
-    loadSavedAddress()
-    loadProvinces()
+    renderCoupon()
+    loadAddress()
 })

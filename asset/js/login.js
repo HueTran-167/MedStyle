@@ -1,35 +1,49 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.getElementById('loginForm')
+import { auth } from './firebase-config.js'
+import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js'
 
-    loginForm.addEventListener('submit', function (event) {
+document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.querySelector('form')
+
+    loginForm.addEventListener('submit', async function (event) {
         event.preventDefault()
 
-        const email = document.getElementById('loginEmail').value.trim()
-        const password = document.getElementById('loginPassword').value.trim()
+        const inputs = loginForm.querySelectorAll('input')
 
-        const users = JSON.parse(localStorage.getItem('users')) || []
+        const email = inputs[0].value.trim()
+        const password = inputs[1].value.trim()
 
-        const user = users.find(function (item) {
-            return item.email === email && item.password === password
-        })
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+            const user = userCredential.user
 
-        if (!user) {
-            const goRegister = confirm('Email này chưa có tài khoản hoặc sai mật khẩu. Bạn có muốn đăng ký không?')
+            localStorage.setItem('currentUser', JSON.stringify({
+                uid: user.uid,
+                name: user.displayName || email.split('@')[0],
+                email: user.email
+            }))
 
-            if (goRegister) {
-                localStorage.setItem('registerEmail', email)
-                window.location.href = 'register.html'
+            alert('Đăng nhập thành công!')
+
+            const redirectAfterLogin = localStorage.getItem('redirectAfterLogin')
+
+            if (redirectAfterLogin) {
+                localStorage.removeItem('redirectAfterLogin')
+                window.location.href = redirectAfterLogin
+            } else {
+                window.location.href = './index.html'
             }
+        } catch (error) {
+            console.log(error)
 
-            return
+            if (error.code === 'auth/user-not-found') {
+                alert('Tài khoản không tồn tại!')
+            } else if (error.code === 'auth/wrong-password') {
+                alert('Mật khẩu không đúng!')
+            } else if (error.code === 'auth/invalid-email') {
+                alert('Email không hợp lệ!')
+            } else {
+                alert('Đăng nhập thất bại. Vui lòng kiểm tra lại email hoặc mật khẩu!')
+            }
         }
-
-        localStorage.setItem('currentUser', JSON.stringify(user))
-
-        const redirect = localStorage.getItem('redirectAfterLogin') || 'index.html'
-        localStorage.removeItem('redirectAfterLogin')
-
-        alert('Đăng nhập thành công!')
-        window.location.href = redirect
     })
 })

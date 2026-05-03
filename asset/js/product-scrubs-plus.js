@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     function getUserKey(prefix) {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'))
 
@@ -20,11 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const quantityInput = document.getElementById('quantityInput')
     const addToCartBtn = document.getElementById('addToCartBtn')
     const sizeButtons = document.querySelectorAll('.size-options button')
-    const genderButtons = document.querySelectorAll('.gender-btn')
-    const sleeveSelect = document.getElementById('sleeveSelect')
 
     let selectedSize = ''
-    let selectedGender = 'Nữ'
 
     function updateCartCount() {
         const cartIcon = document.querySelector('.nav-shopping')
@@ -61,26 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             thumb.classList.add('active')
             mainImg.src = thumb.src
-        })
-    })
-
-    genderButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            genderButtons.forEach(function (item) {
-                item.classList.remove('active')
-            })
-
-            button.classList.add('active')
-            selectedGender = button.dataset.gender
-            mainImg.src = button.dataset.img
-
-            thumbs.forEach(function (thumb) {
-                thumb.classList.remove('active')
-
-                if (thumb.src.includes(button.dataset.img.replace('./', ''))) {
-                    thumb.classList.add('active')
-                }
-            })
         })
     })
 
@@ -138,11 +116,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const product = {
-            name: 'Áo blouse trắng bác sĩ Basic – MSCool',
-            price: 379000,
+            name: 'Bộ đồ Scrubs Plus',
+            price: 399000,
             image: mainImg.src,
-            gender: selectedGender,
-            sleeve: sleeveSelect.value,
             size: selectedSize,
             quantity: Number(quantityInput.value)
         }

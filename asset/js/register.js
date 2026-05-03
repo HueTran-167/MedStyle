@@ -1,55 +1,60 @@
+import { auth, db } from './firebase-config.js'
+import { createUserWithEmailAndPassword, updateProfile } from 'https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js'
+import { doc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js'
+
 document.addEventListener('DOMContentLoaded', function () {
-    const registerForm = document.getElementById('registerForm')
-    const registerEmail = document.getElementById('registerEmail')
+    const registerForm = document.querySelector('form')
 
-    const savedEmail = localStorage.getItem('registerEmail')
-
-    if (savedEmail) {
-        registerEmail.value = savedEmail
-        localStorage.removeItem('registerEmail')
-    }
-
-    registerForm.addEventListener('submit', function (event) {
+    registerForm.addEventListener('submit', async function (event) {
         event.preventDefault()
 
-        const name = document.getElementById('registerName').value.trim()
-        const email = document.getElementById('registerEmail').value.trim()
-        const password = document.getElementById('registerPassword').value.trim()
-        const confirmPassword = document.getElementById('confirmPassword').value.trim()
+        const inputs = registerForm.querySelectorAll('input')
+
+        const name = inputs[0].value.trim()
+        const email = inputs[1].value.trim()
+        const password = inputs[2].value.trim()
+        const confirmPassword = inputs[3].value.trim()
 
         if (password !== confirmPassword) {
             alert('Mật khẩu nhập lại không khớp!')
             return
         }
 
-        const users = JSON.parse(localStorage.getItem('users')) || []
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            const user = userCredential.user
 
-        const emailExists = users.some(function (user) {
-            return user.email === email
-        })
+            await updateProfile(user, {
+                displayName: name
+            })
 
-        if (emailExists) {
-            alert('Email này đã được đăng ký. Vui lòng đăng nhập!')
-            window.location.href = 'login.html'
-            return
+            await setDoc(doc(db, 'users', user.uid), {
+                uid: user.uid,
+                name: name,
+                email: email,
+                role: 'customer',
+                newUserCouponUsed: false,
+                createdAt: serverTimestamp()
+            })
+
+            localStorage.setItem('currentUser', JSON.stringify({
+                uid: user.uid,
+                name: name,
+                email: email
+            }))
+
+            alert('Đăng ký thành công!')
+            window.location.href = './index.html'
+        } catch (error) {
+            console.log(error)
+
+            if (error.code === 'auth/email-already-in-use') {
+                alert('Email này đã được đăng ký!')
+            } else if (error.code === 'auth/weak-password') {
+                alert('Mật khẩu phải có ít nhất 6 ký tự!')
+            } else {
+                alert('Đăng ký thất bại. Vui lòng thử lại!')
+            }
         }
-
-        const newUser = {
-            name: name,
-            email: email,
-            password: password
-        }
-
-        users.push(newUser)
-
-        localStorage.setItem('users', JSON.stringify(users))
-        localStorage.setItem('currentUser', JSON.stringify(newUser))
-
-        alert('Đăng ký thành công!')
-
-        const redirect = localStorage.getItem('redirectAfterLogin') || 'index.html'
-        localStorage.removeItem('redirectAfterLogin')
-
-        window.location.href = redirect
     })
 })

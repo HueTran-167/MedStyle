@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    function getUserKey(prefix) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+
+        if (!currentUser || !currentUser.email) {
+            alert('Bạn cần đăng nhập!')
+            window.location.href = './login.html'
+            return null
+        }
+
+        return prefix + '_' + currentUser.email
+    }
+
     const mainImg = document.getElementById('mainProductImage')
     const zoomArea = document.getElementById('zoomArea')
     const thumbs = document.querySelectorAll('.thumb')
@@ -23,10 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function (event) {
             event.preventDefault()
 
-            serviceButtons.forEach(function (item) {
-                item.classList.remove('active')
-            })
-
+            serviceButtons.forEach(item => item.classList.remove('active'))
             button.classList.add('active')
 
             selectedType = button.getAttribute('data-type')
@@ -38,10 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     thumbs.forEach(function (thumb) {
         thumb.addEventListener('click', function () {
-            thumbs.forEach(function (item) {
-                item.classList.remove('active')
-            })
-
+            thumbs.forEach(item => item.classList.remove('active'))
             thumb.classList.add('active')
             mainImg.src = thumb.src
         })
@@ -74,6 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     addToCartBtn.addEventListener('click', function () {
+        const key = getUserKey('cart')
+        if (!key) return
+
         if (embroideryNote.value.trim() === '') {
             addToCartBtn.textContent = 'VUI LÒNG NHẬP NỘI DUNG THÊU'
             addToCartBtn.classList.add('cart-warning')
@@ -95,9 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
             quantity: Number(quantityInput.value)
         }
 
-        const cart = JSON.parse(localStorage.getItem('cart')) || []
+        const cart = JSON.parse(localStorage.getItem(key)) || []
         cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(cart))
+        localStorage.setItem(key, JSON.stringify(cart))
 
         window.location.href = './cart.html'
     })

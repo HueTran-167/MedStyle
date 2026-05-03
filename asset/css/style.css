@@ -1554,6 +1554,10 @@ video {
     padding: 0 24px 80px;
 }
 
+.blog-section .section-title{
+    padding-top: 20px;
+}
+
 .blog-page-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1688,6 +1692,10 @@ video {
     margin-top: 100px;
     background-color: #fff;
     padding-bottom: 0;
+}
+
+.contact-page .contact-section {
+    padding-top: 20px;
 }
 
 .contact-section,
@@ -4473,5 +4481,264 @@ video {
 
     .payment-upload-label {
         font-size: 12px;
+    }
+}
+
+/* ================= FIX SEARCH PAGE ================= */
+
+.search-page {
+    margin-top: 100px;
+    padding: 80px 0;
+}
+
+.search-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.search-heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.search-heading h1 {
+    color: #1c4898;
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.search-keyword {
+    color: #ff6b00;
+    font-weight: 700;
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 34px;
+}
+
+.search-card {
+    display: block;
+    text-decoration: none;
+    color: #284064;
+
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+
+    padding-bottom: 14px;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.search-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+
+.search-card-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+}
+
+.search-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: 0.3s ease;
+}
+
+.search-card:hover img {
+    transform: scale(1.05);
+}
+
+.search-card p {
+    margin: 12px 14px 4px;
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.search-card h3 {
+    font-size: 14px;
+    color: #1c4898;
+    line-height: 1.5;
+
+    margin: 0 14px 8px;
+
+    min-height: 42px;
+}
+
+.search-card strong {
+    display: block;
+    margin: 0 14px;
+
+    font-size: 15px;
+    color: #000;
+    font-weight: 600;
+}
+
+.search-card h3:hover {
+    color: #ff6b00;
+}
+
+.search-empty {
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+    margin-top: 40px;
+}
+
+@media (max-width: 1024px) {
+    .search-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .search-page {
+        margin-top: 58px;
+        padding: 42px 0;
+    }
+
+    .search-heading h1 {
+        font-size: 24px;
+    }
+
+    .search-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 14px;
+    }
+
+    .search-card h3 {
+        font-size: 11px;
+    }
+
+    .search-card p,
+    .search-card strong {
+        font-size: 11px;
+    }
+}
+
+/* ================= SEARCH HISTORY + SUGGEST ================= */
+
+.search-suggest-box {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+
+    background: #fff;
+    border-radius: 10px;
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+
+    max-height: 260px;       
+    overflow-y: auto;        
+
+    z-index: 99999;
+}
+
+.search-suggest-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 14px;     
+
+    font-size: 13px;
+    color: #284064;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.search-suggest-item:last-child {
+    border-bottom: none;
+}
+
+.search-suggest-item:hover {
+    background: #f5f8ff;
+    color: #1c4898;
+}
+
+.search-suggest-item i {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+.search-suggest-item span {
+    line-height: 1.4;
+}
+
+.account-order {
+    background: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.statusSelect {
+    margin-top: 10px;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+/* PROMO POPUP */
+.promo-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+}
+
+.promo-popup.active {
+    display: flex;
+}
+
+.promo-box {
+    position: relative;
+    max-width: 520px;
+    width: 90%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.promo-box img {
+    width: 100%;
+    display: block;
+}
+
+.promo-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    color: #1c4898;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .promo-box {
+        width: 86%;
     }
 }
